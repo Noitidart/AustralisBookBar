@@ -1,8 +1,8 @@
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 const self = {
-	name: 'MouseMarks',
+	name: 'AustralisBookBar',
 	path: {
-		chrome: 'chrome://mousemarks/content/'
+		chrome: 'chrome://australisbookbar/content/'
 	},
 	aData: 0,
 };
@@ -12,7 +12,6 @@ var cssUri;
 
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
-Cu.import('resource://gre/modules/devtools/Console.jsm');
 XPCOMUtils.defineLazyGetter(myServices, 'as', function(){ return Cc['@mozilla.org/alerts-service;1'].getService(Ci.nsIAlertsService) });
 XPCOMUtils.defineLazyGetter(myServices, 'sss', function(){ return Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService) });
 
