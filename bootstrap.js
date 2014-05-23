@@ -55,17 +55,17 @@ var windowListener = {
 		if (!aDOMWindow) {
 			return;
 		}
-		var PlacesToolbar = aDOMWndow.document.querySelector('#PlacesToolbar');
-		if (PlacesToolbar && aDOMWndow.PlacesToolbar) {
+		var PlacesToolbar = aDOMWindow.document.querySelector('#PlacesToolbar');
+		if (PlacesToolbar && aDOMWindow.PlacesToolbar) {
 			PlacesToolbar.removeAttribute('tooltip');
 			PlacesToolbar.removeAttribute('popupsinherittooltip');
 			aDOMWindow.PlacesToolbar.prototype._onMouseOver = function PT__onMouseOver(aEvent) {
 			    let button = aEvent.target;
 			    if (button.parentNode == this._rootElt && button._placesNode &&
-			        PlacesUtils.nodeIsURI(button._placesNode))
+			        aDOMWindow.PlacesUtils.nodeIsURI(button._placesNode))
 			      aDOMWindow.XULBrowserWindow.setOverLink(aEvent.target._placesNode.title + ' (' + aEvent.target._placesNode.uri + ')', null);
 			}
-        		aXULWindow.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindowUtils).loadSheet(cssUri, 1);
+        		aDOMWindow.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindowUtils).loadSheet(cssUri, 1);
 		}
 		
 	},
@@ -73,17 +73,17 @@ var windowListener = {
 		if (!aDOMWindow) {
 			return;
 		}
-		var PlacesToolbar = aDOMWndow.document.querySelector('#PlacesToolbar');
-		if (PlacesToolbar && aDOMWndow.PlacesToolbar) {
+		var PlacesToolbar = aDOMWindow.document.querySelector('#PlacesToolbar');
+		if (PlacesToolbar && aDOMWindow.PlacesToolbar) {
 			PlacesToolbar.setAttribute('tooltip', 'bhTooltip');
 			PlacesToolbar.setAttribute('popupsinherittooltip', 'true');
 			aDOMWindow.PlacesToolbar.prototype._onMouseOver = function PT__onMouseOver(aEvent) {
 			    let button = aEvent.target;
 			    if (button.parentNode == this._rootElt && button._placesNode &&
-			        PlacesUtils.nodeIsURI(button._placesNode))
-			      aDOMWindow.XULBrowserWindow.seOverLink(aEvent.target._placesNode.title + ' (' + aEvent.target._placesNode.uri + ')', null);
+			        aDOMWindow.PlacesUtils.nodeIsURI(button._placesNode))
+			      aDOMWindow.XULBrowserWindow.setOverLink(aEvent.target._placesNode.uri, null);
 			}
-			aXULWindow.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindowUtils).removeSheet(cssUri, 1);
+			aDOMWindow.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindowUtils).removeSheet(cssUri, 1);
 		}
 	}
 };
@@ -111,7 +111,7 @@ function shutdown(aData, aReason) {
 	if (aReason == APP_SHUTDOWN) return;
 	
 	windowListener.unregister();
-	myServices.sss.unregisterSheet(cssUri, myServices.sss.USER_SHEET);
+	//myServices.sss.unregisterSheet(cssUri, myServices.sss.USER_SHEET);
 }
 
 function install() {}
